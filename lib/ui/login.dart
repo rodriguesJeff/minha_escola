@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:minha_escola/controller/login_controller.dart';
+import 'package:minha_escola/ui/perfil.dart';
 import 'package:minha_escola/ui/widgets/textField.dart';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Login extends StatefulWidget {
 
@@ -8,11 +12,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final login = LoginApi();
+
   final mailController = TextEditingController();
 
   final passController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  final storage = FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +61,30 @@ class _LoginState extends State<Login> {
                           borderRadius: BorderRadius.circular(50) 
                         ),
                         child: FlatButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState.validate()){
-                              var email = mailController.text;
-                              var pass = passController.text;
-                              Navigator.pushNamed(context, '/perfil');
+                              var matricula = mailController.text;
+                              var senha = passController.text;
+                              var jwt = await login.auth(matricula, senha);
+                              print(jwt);
+                              if (jwt != null){                                
+                                
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Perfil()
+                                  )
+                                );
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => 
+                                    AlertDialog(
+                                      title: Text('Falha na autenticação!'),
+                                      content: Text('Matrícula ou senha incorreta!'),
+                                    ),
+                                );                                
+                              }
                             }        
                           },
                           child: Icon(
