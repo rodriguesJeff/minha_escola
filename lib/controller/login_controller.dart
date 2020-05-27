@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:mobx/mobx.dart';
 import 'package:dio/dio.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 part 'login_controller.g.dart';
 
 class LoginApi = _LoginApi with _$LoginApi;
@@ -18,6 +20,8 @@ abstract class _LoginApi with Store {
   @action
   Future<String> auth(mat, pass) async {
 
+    var prefs = await SharedPreferences.getInstance();
+
     Map params = {
       'matricula' : mat,
       'senha': pass
@@ -31,6 +35,8 @@ abstract class _LoginApi with Store {
     );
 
     var jwt = res.data['token']; 
+
+    prefs.setString('token', res.data['token']);
 
     return jwt;
   }

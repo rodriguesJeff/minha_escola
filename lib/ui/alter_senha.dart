@@ -54,7 +54,7 @@ class _AlterarSenhaState extends State<AlterarSenha> {
                 child: FlatButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()){
-                      var antigasenha = antSenhaController.text;
+                      //var antigasenha = antSenhaController.text;
                       var senha = nvSenhaController.text;
                       var senha2 = nvSenha2Controller.text;
                       if (senha == senha2){

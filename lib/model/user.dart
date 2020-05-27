@@ -1,30 +1,38 @@
-import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:convert';
 
-var storage = FlutterSecureStorage();
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-var jwt = storage.read(key: 'jwt');
+Future<UserApi> loadUser() async {
 
-Map header = {
-  'x-access-token' : jwt
-};
+    Dio _dio = Dio();
 
-Future<UserApi> fetchUser() async {
-  var response = await http.get(
-    'http://localhost:3000/api/login',
-    headers: header
-  );
+    final prefs = await SharedPreferences.getInstance();
 
-  if (response.statusCode == 200) {
-    var res = json.decode(response.body);
-    return UserApi.fromJson(res);
+    String jwt = (prefs.getString('token'));
+    print(jwt);
+
+    if (jwt != null){
+      final response = await _dio.get(
+        'http://192.168.1.6:3000/api/data',
+        options: Options(
+          headers: {
+            'x-access-token': jwt
+          }
+        ),
+      );
+
+      if (response.statusCode == 200){
+        print(response.data['data']);
+        return UserApi.fromJson(response.data['data'][0]);
+      }
+      else {
+        throw Exception('Erro ao buscar dados do usuarios');
+      }
+    } else {
+      print('error');
+      return throw Exception('JWT invalida');
+    }
   }
-  else {
-    throw Exception('Erro ao buscar dados do usuario');
-  }
-
-}
 
 class UserApi {
   int alunoId;

@@ -9,10 +9,11 @@ Widget textField(
   return TextFormField(
     controller: controller,
     obscureText: pass,
-    validator: (value){
+    validator: (value) {
       if (value.isEmpty){
         return 'Campo não pode ser vazio';
       }
+      return null;
     },
     decoration: InputDecoration(
       labelText: label,

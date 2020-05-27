@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:minha_escola/model/user.dart';
 
-
 class Perfil extends StatefulWidget {
-
-  Perfil({ Key key }) : super(key: key);
-
   @override
   _PerfilState createState() => _PerfilState();
 }
 
 class _PerfilState extends State<Perfil> {
-
-  Future<UserApi> futureUserApi;
+  Future<UserApi> fetchUser;
 
   @override
   void initState() {
     super.initState();
-    futureUserApi = fetchUser();
+    fetchUser = loadUser();
   }
 
   @override
@@ -42,9 +37,10 @@ class _PerfilState extends State<Perfil> {
         ]
       ),
       body: FutureBuilder<UserApi>(
-        future: futureUserApi,
+        future: fetchUser,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            print(snapshot.data);
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -68,7 +64,7 @@ class _PerfilState extends State<Perfil> {
                       ),
                       SizedBox(height: 30),
                       Text(
-                        snapshot.data.nome,
+                        snapshot.data.nome.toString(),
                         style: TextStyle(
                           fontSize: 24
                         )  

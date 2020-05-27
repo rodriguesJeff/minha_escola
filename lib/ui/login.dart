@@ -3,8 +3,6 @@ import 'package:minha_escola/controller/login_controller.dart';
 import 'package:minha_escola/ui/perfil.dart';
 import 'package:minha_escola/ui/widgets/textField.dart';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 class Login extends StatefulWidget {
 
   @override
@@ -19,7 +17,7 @@ class _LoginState extends State<Login> {
   final passController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  final storage = FlutterSecureStorage();
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +64,7 @@ class _LoginState extends State<Login> {
                               var matricula = mailController.text;
                               var senha = passController.text;
                               var jwt = await login.auth(matricula, senha);
-                              print(jwt);
-                              if (jwt != null){                                
+                              if (jwt != ''){                                
                                 
                                 Navigator.push(
                                   context,

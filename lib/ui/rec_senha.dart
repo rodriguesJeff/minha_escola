@@ -54,7 +54,7 @@ class _RecuperaSenhaState extends State<RecuperaSenha> {
                 child: FlatButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()){
-                      var matricula = matController.text;
+                      //var matricula = matController.text;
                       var senha = nvSenhaController.text;
                       var senha2 = nvSenha2Controller.text;
                       if (senha == senha2){
