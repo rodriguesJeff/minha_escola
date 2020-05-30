@@ -13,7 +13,7 @@ Future<UserApi> loadUser() async {
 
     if (jwt != null){
       final response = await _dio.get(
-        'http://192.168.1.6:3000/api/data',
+        'http://localhost:3000/api/data',
         options: Options(
           headers: {
             'x-access-token': jwt

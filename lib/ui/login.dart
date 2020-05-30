@@ -59,7 +59,7 @@ class _LoginState extends State<Login> {
                           borderRadius: BorderRadius.circular(50) 
                         ),
                         child: FlatButton(
-                          onPressed: () async {
+                          onPressed: () async {                            
                             if (_formKey.currentState.validate()){
                               var matricula = mailController.text;
                               var senha = passController.text;

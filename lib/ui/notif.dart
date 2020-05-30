@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:minha_escola/controller/notifications_controller.dart';
 
 class Notificacoes extends StatefulWidget {
   @override
@@ -6,6 +8,13 @@ class Notificacoes extends StatefulWidget {
 }
 
 class _NotificacoesState extends State<Notificacoes> {
+  NotificationsController notificationsController; //setando a variavel
+  @override 
+  void initState() {
+    super.initState();
+    notificationsController = NotificationsController(); //iniciando a variavel
+    notificationsController.fetchNotificationsList();//chamando o metodo para fazer a request dos dados
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,25 +27,49 @@ class _NotificacoesState extends State<Notificacoes> {
           style: TextStyle(fontSize: 30),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(15),
-        child: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (BuildContext context, int index){
-            return Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Color(0xffF8B195)
-                )
-              ),
-            );
-          }
-        ),
-      ),
+      body: Observer(
+        name: 'ListaNotificacoes',
+        builder: (_) {//criando o observavel        
+        return (notificationsController.notificationsApi != null) ?//verificando se nao foi-me dado uma string vazia
+          ListView.builder(
+            itemCount: notificationsController.notificationsApi.data.length,//pegando tamanho da lista            
+            /*
+              notificationsController = a variavel que chama a store do mobx
+              notificationsApi = variavel da store que pega o modelo da NotificationsApi
+              data = variavel que adiciona tudo que foi pego na request em uma lista              
+            */ 
+            
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(top: 7.5, left: 15, right: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Color(0xffF8B195)
+                  ),
+                  child: ListTile(
+                    title: Text(
+                      'Notificação:',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w100
+                      )
+                    ),
+                    subtitle: Text(
+                      notificationsController.notificationsApi.data[index].conteudo,
+                      style: TextStyle(
+                        fontSize: 15
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ) : 
+          Center( 
+            child: CircularProgressIndicator()
+          );
+      }),
     );
   }
 }
