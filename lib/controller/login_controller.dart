@@ -34,10 +34,19 @@ abstract class _LoginApi with Store {
       data: _body,
     );
 
-    var jwt = res.data['token']; 
-
-    prefs.setString('token', res.data['token']);
-
-    return jwt;
+    switch (res.statusCode){
+      case 200:
+        var jwt = res.data['token']; 
+        prefs.setString('token', res.data['token']);
+        return jwt;
+      break;
+      case 404:
+        var jwt = '';
+        return jwt;
+      break;
+      default:
+        return null;
+      break;
+    }
   }
 }

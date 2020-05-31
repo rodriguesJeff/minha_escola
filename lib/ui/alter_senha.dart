@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minha_escola/controller/altera_senha_controller.dart';
 import 'package:minha_escola/ui/widgets/textField.dart';
 
 class AlterarSenha extends StatefulWidget {
@@ -10,6 +11,8 @@ class _AlterarSenhaState extends State<AlterarSenha> {
   final antSenhaController = TextEditingController();
   final nvSenhaController = TextEditingController();
   final nvSenha2Controller = TextEditingController();
+
+  final alteraSenhaController = AlteraSenhaController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -52,13 +55,26 @@ class _AlterarSenhaState extends State<AlterarSenha> {
                   borderRadius: BorderRadius.circular(50) 
                 ),
                 child: FlatButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()){
-                      //var antigasenha = antSenhaController.text;
-                      var senha = nvSenhaController.text;
-                      var senha2 = nvSenha2Controller.text;
-                      if (senha == senha2){
-                        Navigator.pushNamed(context, '/perfil');
+                      var antigasenha = antSenhaController.text;
+                      var novasenha = nvSenhaController.text;
+                      var novasenha2 = nvSenha2Controller.text;
+                      if (novasenha == novasenha2){
+                        bool success = await alteraSenhaController.alterarSenha(antigasenha, novasenha);
+                        if (success == true){
+                          Navigator.pop(context);
+                        } else {
+                          final snackBar = SnackBar(
+                            content: Text('Falha ao alterar a senha'),
+                          );
+                          Scaffold.of(context).showSnackBar(snackBar);
+                        }
+                      } else {
+                        final snackBar = SnackBar(
+                          content: Text('Senhas nao coincidem'),
+                        );
+                        return Scaffold.of(context).showSnackBar(snackBar);
                       }
                     }        
                   },

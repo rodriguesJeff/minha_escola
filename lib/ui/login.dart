@@ -73,14 +73,10 @@ class _LoginState extends State<Login> {
                                   )
                                 );
                               } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => 
-                                    AlertDialog(
-                                      title: Text('Falha na autenticação!'),
-                                      content: Text('Matrícula ou senha incorreta!'),
-                                    ),
-                                );                                
+                                final snackbar = SnackBar(
+                                  content: Text('Dados nao encontrados'),
+                                );
+                                return Scaffold.of(context).showSnackBar(snackbar);
                               }
                             }        
                           },
@@ -92,7 +88,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       FlatButton(
-                        onPressed: () {
+                        onPressed: () {                          
                           Navigator.pushNamed(context, '/rec_senha');
                         },
                         child: Text(
