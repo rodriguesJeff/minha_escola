@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Initial extends StatelessWidget {
   @override
@@ -35,8 +36,14 @@ class Initial extends StatelessWidget {
               ),
             ),
             child: FlatButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                var token = prefs.getString('token');
+                if (token != null) {
+                  Navigator.pushReplacementNamed(context, '/perfil');
+                } else {
+                  Navigator.pushNamed(context, '/login');
+                }
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

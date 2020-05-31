@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minha_escola/model/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Perfil extends StatefulWidget {
   @override
@@ -29,8 +30,13 @@ class _PerfilState extends State<Perfil> {
               Icons.exit_to_app,
               size: 35,
             ), 
-            onPressed: () {
-              Navigator.of(context).pop();
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              var token = prefs.getString('token');
+              token = null;
+              prefs.setString('token', token);
+              print(token);
+              Navigator.pushReplacementNamed(context, '/initial');
             }
           ),
           SizedBox(width: 10)

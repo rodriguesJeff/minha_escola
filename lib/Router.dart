@@ -9,6 +9,7 @@ import 'package:minha_escola/ui/rec_senha.dart';
 
 class Routes {
   var router = <String, WidgetBuilder>{
+    '/initial': (BuildContext context) => Initial(),
     '/login': (BuildContext context) => Login(),
     '/perfil': (BuildContext context) => Perfil(),
     '/boletim': (BuildContext context) => Boletim(),
