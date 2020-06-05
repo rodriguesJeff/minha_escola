@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:minha_escola/model/notifications.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../core.dart';
 part 'notifications_controller.g.dart';
 
 class NotificationsController = _NotificationsControllerBase with _$NotificationsController;
@@ -33,7 +35,7 @@ abstract class _NotificationsControllerBase with Store {
     try {
       if (jwt != null ) {
           final response = await dio.get(
-          'http://localhost:3000/api/notifications',
+          Core.baseUrl + '/notifications',
           options: Options(
             headers: {
               'x-access-token': jwt

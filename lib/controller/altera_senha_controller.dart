@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../core.dart';
 part 'altera_senha_controller.g.dart';
 
 class AlteraSenhaController = _AlteraSenhaControllerBase with _$AlteraSenhaController;
@@ -32,7 +34,7 @@ abstract class _AlteraSenhaControllerBase with Store {
     var _body = json.encode(_data);
 
     var response = await _dio.post(
-      'http://localhost:3000/api/alterasenha',
+      Core.baseUrl + '/alterasenha',
       data: _body,
       options: Options(
         headers: {

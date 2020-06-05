@@ -43,6 +43,23 @@ mixin _$AlteraSenhaController on _AlteraSenhaControllerBase, Store {
     }, _$_novasenhaAtom, name: '${_$_novasenhaAtom.name}_set');
   }
 
+  final _$successAtom = Atom(name: '_AlteraSenhaControllerBase.success');
+
+  @override
+  bool get success {
+    _$successAtom.context.enforceReadPolicy(_$successAtom);
+    _$successAtom.reportObserved();
+    return super.success;
+  }
+
+  @override
+  set success(bool value) {
+    _$successAtom.context.conditionallyRunInAction(() {
+      super.success = value;
+      _$successAtom.reportChanged();
+    }, _$successAtom, name: '${_$successAtom.name}_set');
+  }
+
   final _$alterarSenhaAsyncAction = AsyncAction('alterarSenha');
 
   @override
@@ -53,7 +70,7 @@ mixin _$AlteraSenhaController on _AlteraSenhaControllerBase, Store {
 
   @override
   String toString() {
-    final string = '';
+    final string = 'success: ${success.toString()}';
     return '{$string}';
   }
 }

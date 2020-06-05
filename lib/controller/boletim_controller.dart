@@ -3,6 +3,8 @@ import 'package:minha_escola/model/boletim.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core.dart';
+
 
 part 'boletim_controller.g.dart';
 
@@ -38,7 +40,7 @@ abstract class _BoletimControllerBase with Store {
       if (jwt != null) {
 
         final response = await _dio.get(
-          'http://localhost:3000/api/boletim',
+          Core.baseUrl + '/boletim',
           options: Options(
             headers: {
               'x-access-token': jwt

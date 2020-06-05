@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core.dart';
+
 part 'login_controller.g.dart';
 
 class LoginApi = _LoginApi with _$LoginApi;
@@ -20,33 +22,38 @@ abstract class _LoginApi with Store {
   @action
   Future<String> auth(mat, pass) async {
 
-    var prefs = await SharedPreferences.getInstance();
+    try {
+      var prefs = await SharedPreferences.getInstance();
 
-    Map params = {
-      'matricula' : mat,
-      'senha': pass
-    };
+      Map params = {
+        'matricula' : mat,
+        'senha': pass
+      };
 
-    var _body = json.encode(params);
+      var _body = json.encode(params);
 
-    var res = await dio.post(
-      'http://localhost:3000/api/login', 
-      data: _body,
-    );
+      var res = await dio.post(
+        Core.baseUrl + '/login', 
+        data: _body,
+      );
 
-    switch (res.statusCode){
-      case 200:
-        var jwt = res.data['token']; 
-        prefs.setString('token', res.data['token']);
-        return jwt;
-      break;
-      case 404:
+      var jwt = res.data['token'];
+      prefs.setString('token', res.data['token']);
+      return jwt;
+    } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        print(e.response.statusCode);
+        print(e.response.statusMessage);
         var jwt = '';
         return jwt;
-      break;
-      default:
-        return null;
-      break;
+      } else {
+        print(e.message);
+        print(e.request);
+        var jwt = '';
+        return jwt;
+      }
     }
+
+
   }
 }

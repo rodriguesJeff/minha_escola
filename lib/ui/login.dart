@@ -64,19 +64,18 @@ class _LoginState extends State<Login> {
                               var matricula = mailController.text;
                               var senha = passController.text;
                               var jwt = await login.auth(matricula, senha);
-                              if (jwt != ''){                                
+                              if (jwt == '' || jwt == null){                                
+                                return AlertDialog(
+                                  title: Text('Dados não encontrados!')
+                                );
                                 
+                              } else {                                
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Perfil()
                                   )
                                 );
-                              } else {
-                                final snackbar = SnackBar(
-                                  content: Text('Dados nao encontrados'),
-                                );
-                                return Scaffold.of(context).showSnackBar(snackbar);
                               }
                             }        
                           },
