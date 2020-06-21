@@ -70,7 +70,9 @@ class _PerfilState extends State<Perfil> {
                           Container(
                             width: 100,
                             height: 100,
-                            child: Image.network('https://pt.gravatar.com/userimage/182350569/a4daaa81158c26662091765680f3c96b.png'),
+                            child: Image(
+                              image: AssetImage('assets/perfil.png'),
+                            )
                           ),
                           SizedBox(height: 30),
                           Text(

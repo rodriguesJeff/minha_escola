@@ -22,36 +22,26 @@ abstract class _LoginApi with Store {
   @action
   Future<String> auth(mat, pass) async {
 
-    try {
-      var prefs = await SharedPreferences.getInstance();
+    var prefs = await SharedPreferences.getInstance();
 
-      Map params = {
-        'matricula' : mat,
-        'senha': pass
-      };
+    Map params = {
+      'matricula' : mat,
+      'senha': pass
+    };
 
-      var _body = json.encode(params);
+    var _body = json.encode(params);
 
-      var res = await dio.post(
-        Core.baseUrl + '/login', 
-        data: _body,
-      );
+    var res = await dio.post(
+      Core.baseUrl + '/login', 
+      data: _body,
+    );
 
+    if (res.statusCode != 200) {
+      return null;
+    } else {
       var jwt = res.data['token'];
       prefs.setString('token', res.data['token']);
       return jwt;
-    } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        print(e.response.statusCode);
-        print(e.response.statusMessage);
-        var jwt = '';
-        return jwt;
-      } else {
-        print(e.message);
-        print(e.request);
-        var jwt = '';
-        return jwt;
-      }
     }
 
 
