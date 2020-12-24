@@ -6,34 +6,34 @@ part of 'boletim_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$BoletimController on _BoletimControllerBase, Store {
   Computed<BoletimApi> _$boletimApiComputed;
 
   @override
   BoletimApi get boletimApi =>
-      (_$boletimApiComputed ??= Computed<BoletimApi>(() => super.boletimApi))
+      (_$boletimApiComputed ??= Computed<BoletimApi>(() => super.boletimApi,
+              name: '_BoletimControllerBase.boletimApi'))
           .value;
 
   final _$_boletimApiAtom = Atom(name: '_BoletimControllerBase._boletimApi');
 
   @override
   BoletimApi get _boletimApi {
-    _$_boletimApiAtom.context.enforceReadPolicy(_$_boletimApiAtom);
-    _$_boletimApiAtom.reportObserved();
+    _$_boletimApiAtom.reportRead();
     return super._boletimApi;
   }
 
   @override
   set _boletimApi(BoletimApi value) {
-    _$_boletimApiAtom.context.conditionallyRunInAction(() {
+    _$_boletimApiAtom.reportWrite(value, super._boletimApi, () {
       super._boletimApi = value;
-      _$_boletimApiAtom.reportChanged();
-    }, _$_boletimApiAtom, name: '${_$_boletimApiAtom.name}_set');
+    });
   }
 
-  final _$loadBoletimAsyncAction = AsyncAction('loadBoletim');
+  final _$loadBoletimAsyncAction =
+      AsyncAction('_BoletimControllerBase.loadBoletim');
 
   @override
   Future<BoletimApi> loadBoletim() {
@@ -45,7 +45,8 @@ mixin _$BoletimController on _BoletimControllerBase, Store {
 
   @override
   dynamic fetchBoletim() {
-    final _$actionInfo = _$_BoletimControllerBaseActionController.startAction();
+    final _$actionInfo = _$_BoletimControllerBaseActionController.startAction(
+        name: '_BoletimControllerBase.fetchBoletim');
     try {
       return super.fetchBoletim();
     } finally {
@@ -55,7 +56,8 @@ mixin _$BoletimController on _BoletimControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'boletimApi: ${boletimApi.toString()}';
-    return '{$string}';
+    return '''
+boletimApi: ${boletimApi}
+    ''';
   }
 }

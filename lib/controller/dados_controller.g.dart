@@ -6,50 +6,48 @@ part of 'dados_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DadosController on _DadosControllerBase, Store {
   Computed<UserApi> _$userApiComputed;
 
   @override
   UserApi get userApi =>
-      (_$userApiComputed ??= Computed<UserApi>(() => super.userApi)).value;
+      (_$userApiComputed ??= Computed<UserApi>(() => super.userApi,
+              name: '_DadosControllerBase.userApi'))
+          .value;
 
   final _$jwtAtom = Atom(name: '_DadosControllerBase.jwt');
 
   @override
   String get jwt {
-    _$jwtAtom.context.enforceReadPolicy(_$jwtAtom);
-    _$jwtAtom.reportObserved();
+    _$jwtAtom.reportRead();
     return super.jwt;
   }
 
   @override
   set jwt(String value) {
-    _$jwtAtom.context.conditionallyRunInAction(() {
+    _$jwtAtom.reportWrite(value, super.jwt, () {
       super.jwt = value;
-      _$jwtAtom.reportChanged();
-    }, _$jwtAtom, name: '${_$jwtAtom.name}_set');
+    });
   }
 
   final _$_userApiAtom = Atom(name: '_DadosControllerBase._userApi');
 
   @override
   UserApi get _userApi {
-    _$_userApiAtom.context.enforceReadPolicy(_$_userApiAtom);
-    _$_userApiAtom.reportObserved();
+    _$_userApiAtom.reportRead();
     return super._userApi;
   }
 
   @override
   set _userApi(UserApi value) {
-    _$_userApiAtom.context.conditionallyRunInAction(() {
+    _$_userApiAtom.reportWrite(value, super._userApi, () {
       super._userApi = value;
-      _$_userApiAtom.reportChanged();
-    }, _$_userApiAtom, name: '${_$_userApiAtom.name}_set');
+    });
   }
 
-  final _$loadUserAsyncAction = AsyncAction('loadUser');
+  final _$loadUserAsyncAction = AsyncAction('_DadosControllerBase.loadUser');
 
   @override
   Future<UserApi> loadUser() {
@@ -61,7 +59,8 @@ mixin _$DadosController on _DadosControllerBase, Store {
 
   @override
   dynamic fetchData() {
-    final _$actionInfo = _$_DadosControllerBaseActionController.startAction();
+    final _$actionInfo = _$_DadosControllerBaseActionController.startAction(
+        name: '_DadosControllerBase.fetchData');
     try {
       return super.fetchData();
     } finally {
@@ -71,7 +70,9 @@ mixin _$DadosController on _DadosControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'jwt: ${jwt.toString()},userApi: ${userApi.toString()}';
-    return '{$string}';
+    return '''
+jwt: ${jwt},
+userApi: ${userApi}
+    ''';
   }
 }
