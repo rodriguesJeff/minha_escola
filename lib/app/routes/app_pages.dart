@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:minha_escola/app/modules/initial/views/initial_view.dart';
 import 'package:minha_escola/app/modules/login/bindings/login_bind.dart';
 import 'package:minha_escola/app/modules/login/views/login_view.dart';
+import 'package:minha_escola/app/modules/notification/bindings/notification_bind.dart';
+import 'package:minha_escola/app/modules/notification/views/notification_view.dart';
 import 'package:minha_escola/app/modules/pass_recuperation.dart/views/pass_recuperation_view.dart';
 import 'package:minha_escola/app/modules/profile/bindings/profile_bind.dart';
 import 'package:minha_escola/app/modules/profile/views/profile_view.dart';
@@ -51,5 +53,10 @@ static const INITIAL = Routes.INITIAL;
       page:()=> PassRecuperationView(), 
       //binding: HomeBinding(),
     ),
+    GetPage(
+      name: Routes.NOTIFICATIONS,
+      page:()=> Notifications(),
+      binding: NotificationBindings()
+    )
   ];
 }

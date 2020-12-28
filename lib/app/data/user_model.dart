@@ -1,21 +1,3 @@
-/*class UserModel {
-  Data data;
-
-  UserModel({this.data});
-
-  UserModel.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data.toJson();
-    }
-    return data;
-  }
-}*/
-
 class Data {
   String sId;
   String firstname;
@@ -48,19 +30,5 @@ class Data {
     parentEmail = json['parent_email'];
     className = json['class_name'];
     iV = json['__v'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['firstname'] = this.firstname;
-    data['lastname'] = this.lastname;
-    data['mat'] = this.mat;
-    data['pass'] = this.pass;
-    data['school_name'] = this.schoolName;
-    data['parent_email'] = this.parentEmail;
-    data['class_name'] = this.className;
-    data['__v'] = this.iV;
-    return data;
   }
 }

@@ -5,7 +5,7 @@ import 'package:minha_escola/app/modules/profile/controllers/profile_controller.
 class ProfileView extends GetView {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProfileController>(
+    return GetX<ProfileController>(
       builder: (_) => Scaffold(
         backgroundColor: Color(0xff345D7E),
         appBar: AppBar(
@@ -88,17 +88,7 @@ class ProfileView extends GetView {
                       ),
                       child: FlatButton(
                         onPressed: () {
-                          Get.dialog(
-                            AlertDialog(
-                              actions: [
-                                FlatButton(
-                                  child: Text("Tentar depois!"),
-                                  onPressed: () {Get.back();}
-                                )                                
-                              ],
-                              content: Text("Infelizmente essa tela ainda não foi adicionada."),
-                            )
-                          );
+                          Get.toNamed('/notifications');
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

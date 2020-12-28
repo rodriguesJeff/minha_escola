@@ -10,5 +10,6 @@ abstract class Routes{
   static const BOLETIM = '/boletim';
   static const ALTERPASSWORD = '/alterpass';
   static const PASSRECUPERATION = '/passrecuperation';
+  static const NOTIFICATIONS = '/notifications';
 
 }
