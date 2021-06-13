@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minha_escola/core/widgets/textField.dart';
 
 class PasswordRecoveryPage extends StatefulWidget {
   @override
@@ -33,13 +32,32 @@ class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
                   Text('Recuperar senha',
                       style: TextStyle(fontSize: 38, color: Colors.white)),
                   SizedBox(height: 40),
-                  textField(matController, false, 'matricula', 'matricula'),
+                  TextField(
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    cursorColor: Colors.white,
+                  ),
                   SizedBox(height: 10),
-                  textField(
-                      nvSenhaController, true, 'nova senha', 'nova senha'),
+                  TextField(
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    cursorColor: Colors.white,
+                  ),
                   SizedBox(height: 10),
-                  textField(nvSenha2Controller, true, 'repetir nova senha',
-                      'repetir nova senha'),
+                  TextField(
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    cursorColor: Colors.white,
+                  ),
                   SizedBox(height: 10),
                   Container(
                     width: 50,

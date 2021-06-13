@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minha_escola/features/home/pages/home_page.dart';
+import 'package:minha_escola/features/auth/pages/login_page.dart';
 
 class Onboarding extends StatelessWidget {
   @override
@@ -33,7 +33,7 @@ class Onboarding extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => HomePage(),
+                      builder: (_) => LoginPage(),
                     ),
                   );
                 },

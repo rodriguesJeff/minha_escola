@@ -1,23 +1,21 @@
 class User {
-  String sId;
   String firstname;
   String lastname;
-  String mat;
-  String pass;
+  String matricula;
+  String password;
   String schoolName;
   String parentEmail;
   String className;
-  int iV;
+  int age;
 
-  User(
-      {this.sId,
-      this.firstname,
-      this.lastname,
-      this.mat,
-      this.pass,
-      this.schoolName,
-      this.parentEmail,
-      this.className,
-      this.iV});
-
+  User({
+    this.firstname,
+    this.lastname,
+    this.matricula,
+    this.password,
+    this.schoolName,
+    this.parentEmail,
+    this.className,
+    this.age,
+  });
 }
