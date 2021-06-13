@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:minha_escola/ui/alter_senha.dart';
-import 'package:minha_escola/ui/boletim.dart';
-import 'package:minha_escola/ui/initial.dart';
-import 'package:minha_escola/ui/login.dart';
-import 'package:minha_escola/ui/notif.dart';
-import 'package:minha_escola/ui/perfil.dart';
-import 'package:minha_escola/ui/rec_senha.dart';
+import 'package:minha_escola/features/auth/pages/login_page.dart';
+import 'package:minha_escola/features/home/pages/home_page.dart';
+import 'package:minha_escola/features/auth/pages/password_reset_page.dart';
+import 'package:minha_escola/features/boletim/pages/boletim_page.dart';
+import 'package:minha_escola/features/onboarding/pages/onboarding.dart';
+import 'package:minha_escola/features/notifications/pages/notifications_page.dart';
+import 'package:minha_escola/features/auth/pages/password_recovery.dart';
 
 class Routes {
   var router = <String, WidgetBuilder>{
-    '/initial': (BuildContext context) => Initial(),
-    '/login': (BuildContext context) => Login(),
-    '/perfil': (BuildContext context) => Perfil(),
-    '/boletim': (BuildContext context) => Boletim(),
-    '/notificacoes': (BuildContext context) => Notificacoes(),
-    '/rec_senha': (BuildContext context) => RecuperaSenha(),
-    '/alter_senha': (BuildContext context) => AlterarSenha(),
+    '/initial': (BuildContext context) => Onboarding(),
+    '/login': (BuildContext context) => LoginPage(),
+    '/perfil': (BuildContext context) => HomePage(),
+    '/boletim': (BuildContext context) => BoletimPage(),
+    '/notificacoes': (BuildContext context) => NotificationsPage(),
+    '/rec_senha': (BuildContext context) => PasswordResetPage(),
+    '/alter_senha': (BuildContext context) => PasswordRecoveryPage(),
   };
 
   Routes () {
@@ -26,7 +26,7 @@ class Routes {
         theme: ThemeData(
           fontFamily: 'Montserrat'
         ),
-        home: Initial(),
+        home: Onboarding(),
         routes: router
       )
     );

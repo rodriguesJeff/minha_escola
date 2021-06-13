@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:minha_escola/ui/widgets/textField.dart';
+import 'package:minha_escola/core/widgets/textField.dart';
 
-class RecuperaSenha extends StatefulWidget {
+class PasswordRecoveryPage extends StatefulWidget {
   @override
-  _RecuperaSenhaState createState() => _RecuperaSenhaState();
+  _PasswordRecoveryPageState createState() => _PasswordRecoveryPageState();
 }
 
-class _RecuperaSenhaState extends State<RecuperaSenha> {
+class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
   final matController = TextEditingController();
   final nvSenhaController = TextEditingController();
   final nvSenha2Controller = TextEditingController();
