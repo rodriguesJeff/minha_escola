@@ -24,10 +24,15 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Login Aluno',
+                  'Login Usuário',
                   style: TextStyle(fontSize: 38, color: Colors.white),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 15),
+                Text(
+                  '(Alunos e Responsáveis)',
+                  style: TextStyle(fontSize: 30, color: Colors.white),
+                ),
+                SizedBox(height: 15),
                 Padding(
                   padding: EdgeInsets.all(20),
                   child: Column(
